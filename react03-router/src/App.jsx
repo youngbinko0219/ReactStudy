@@ -12,6 +12,7 @@ NavLink 컴포넌트는 <a>태그와 같이 하이퍼링크를 제공한다.
 */
 const TopNavi = () => {
   return (
+    <>
     <nav>
       <NavLink to="/">Home</NavLink>&nbsp;
       <NavLink to="/intro">인트로</NavLink>&nbsp;
@@ -23,23 +24,30 @@ const TopNavi = () => {
       &nbsp; */}
       {/* <Link to="/xss">잘못된 Link</Link>&nbsp; */}
     </nav>
+    </>
   );
 };
 
+/*
+아웃렛 컴포넌트 :
+웹사이트 제작시 공통으로 사용되는 레이아웃에서 특정 요청에 따른 내용만 변경해야 할 때 사용한다.
+*/
 const CommonLayout = () => {
   return (
-    <div>
-      <header style={{ background: "lightgray", padding: "10px" }}>
-        아웃렛 컴포넌트 알아보기
-      </header>
-      <article>
-        {/* 각 페이지의 컴포넌트가 보여지는 부분에 설정한다. */}
-        <Outlet />
-      </article>
-      <footer style={{ background: "lightgray", padding: "10px" }}>
-        공통 레이아웃
-      </footer>
-    </div>
+    <>
+      <div>
+        <header style={{ background: "lightgray", padding: "10px" }}>
+          아웃렛 컴포넌트 알아보기
+        </header>
+        <article>
+          {/* 각 페이지의 컴포넌트가 보여지는 부분에 설정한다. */}
+          <Outlet />
+        </article>
+        <footer style={{ background: "lightgray", padding: "10px" }}>
+          공통 레이아웃
+        </footer>
+      </div>
+    </>
   );
 };
 
@@ -52,6 +60,10 @@ const Home = () => {
   );
 };
 
+/*
+인트로 경로가 요청될 때 아웃렛 컴포넌트 위치에 렌더링된다.
+이 부분은 <App> 컴포넌트에 설정되어 있다.
+*/
 const LayoutIndex = () => {
   return (
     <>
@@ -64,19 +76,29 @@ const LayoutIndex = () => {
   );
 };
 
+/*
+설정된 경뢰 외 잘못된 경로를 요청했을 때 렌더링되는 컴포넌트
+Link 컴포넌트는 NavLink와 기능은 동일하지만 클래스를 추가하는 기능은 없다.
+*/
+
 const NotFound = () => {
   return (
-    <div>
-      <h2>Not Found</h2>
-      <p>
-        페이지를 찾을 수 없습니다.
-        <br />
-        <Link to="/">Home</Link>
-      </p>
-    </div>
+    <>
+      <div>
+        <h2>Not Found</h2>
+        <p>
+          페이지를 찾을 수 없습니다.
+          <br />
+          <Link to="/">Home</Link>
+        </p>
+      </div>
+    </>
   );
 };
 
+/*
+/intro/router 경로가 요청되었을 때 아웃렛에 렌더링되는 컴포넌트
+*/
 const RouterHooks = () => {
   const location = useLocation();
 
@@ -137,17 +159,25 @@ const RouterHooks = () => {
 
 function App() {
   return (
-    <div className="App">
-      <TopNavi></TopNavi>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/intro" element={<CommonLayout />}>
-          <Route index element={<LayoutIndex />} />
-          <Route path="router" element={<RouterHooks />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <>
+      {/* 라우터 처리가 필요없는 컴포넌트는 전체페이지에서 공통으로 출력하는 용도로 사용한다. */}
+      <div className="App">
+        <TopNavi></TopNavi>
+        {/* 라우터 처리가 필요한 컴포넌트는 아래와 같이 path, element라는 props를 통해 경로와 렌더링한 컴포넌트를 지정한다. */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* 하위 경로가 필요한 경우에는 '중첩 라우터'를 사용한다. */}
+          <Route path="/intro" element={<CommonLayout />}>
+            {/* intro 로 요청이 들어오면 이 컴포넌트로 렌더링링 */}
+            <Route index element={<LayoutIndex />} />
+            {/* intro/router 요청이 들어오면 routerhooks 컴포넌트를 렌더링한다. */}
+            <Route path="router" element={<RouterHooks />} />
+          </Route>
+          {/* 지정되지 않은 모든 경로에 대해 404처리 */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
