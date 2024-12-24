@@ -11,15 +11,11 @@ function App() {
     <>
       <Routes>
         {/* 첫 진입시에는 게시판의 목록을 렌더링한다. */}
-        <Route path="/" element={<List></List>} />
-        <Route path="/list" element={<List></List>} />
-        <Route path="/view">
-          <Route path=":idx" element={<View></View>} />
-        </Route>
-        <Route path="/write" element={<Write></Write>} />
-        <Route path="/edit">
-          <Route path=":idx" element={<Edit></Edit>} />
-        </Route>
+        <Route path="/" element={<List />} />
+        <Route path="/list" element={<List />} />
+        <Route path="/view/:idx" element={<View />} />
+        <Route path="/write" element={<Write />} />
+        <Route path="/edit/:idx" element={<Edit />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

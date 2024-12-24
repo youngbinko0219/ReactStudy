@@ -31,9 +31,40 @@ function View(props) {
         <h2>게시판-읽기</h2>
       </header>
       <nav>
-        <Link to="/list">목록</Link>
-        <Link to="/edit">수정</Link>
-        <Link to="/delete">삭제</Link>
+        <Link to="/list">목록</Link>&nbsp;
+        <Link to={`/edit/${params.idx}`}>수정</Link>&nbsp;
+        <Link
+          onClick={() => {
+            if (window.confirm("삭제하시겠습니까?")) {
+              console.log("삭제 idx", params.idx);
+              fetch("http://nakja.co.kr/APIs/php7/boardDeleteJSON.php", {
+                method: "POST",
+                headers: {
+                  "Content-type":
+                    "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: new URLSearchParams({
+                  tname: "nboard_news",
+                  idx: params.idx,
+                }),
+              })
+                .then((result) => {
+                  return result.json();
+                })
+                .then((json) => {
+                  console.log(json);
+                  if (json.result === "success") {
+                    alert("삭제되었습니다.");
+                    navigate("/list");
+                  } else {
+                    alert("삭제에 실패했습니다.");
+                  }
+                });
+            }
+          }}
+        >
+          삭제
+        </Link>
       </nav>
       <article>
         <table id="boardTable">
