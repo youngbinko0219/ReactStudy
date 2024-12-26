@@ -27,25 +27,25 @@ function MyInput1() {
       button1.style.color = "black";
     } else {
       button1.style.backgroundColor = "black";
-      button1.style.backgroundColor = "white";
+      button1.style.Color = "white";
     }
   }
 
   const [btnStyle, setBtenStyle] = useState({
     "background-color": "yellow",
-    color: "red",
+    'color': "red",
   });
 
   const btn2Clicked = () => {
     if (btnStyle.color === "red") {
       setBtenStyle({
         "background-color": "blue",
-        color: "white",
+        'color': "white",
       });
     } else {
       setBtenStyle({
         "background-color": "yellow",
-        color: "red",
+        'color': "red",
       });
     }
   };
