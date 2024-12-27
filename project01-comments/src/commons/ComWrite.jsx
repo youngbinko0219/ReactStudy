@@ -31,7 +31,7 @@ function ComWrite({ onAdd }) {
                 />
               </td>
               <td rowSpan="2">
-                <input type="submit" value="댓글작성" id="btn" />
+                <input type="submit" value="댓글 작성" id="btn" />
               </td>
             </tr>
             <tr>

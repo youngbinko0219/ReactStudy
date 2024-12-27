@@ -32,7 +32,7 @@ function App() {
 
   const handleAddComment = (newComment) => {
     const newNo = myData.length + 1;
-    const newDate = new Date().toISOString().split("T")[0]; // 현재 날짜
+    const newDate = new Date().toISOString().split("T")[0];
     const updatedData = [
       ...myData,
       {

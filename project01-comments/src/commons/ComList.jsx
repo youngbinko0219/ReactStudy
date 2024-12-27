@@ -17,9 +17,9 @@ function ComList({ myData, onEdit, onDelete }) {
             <React.Fragment key={item.no}>
               <tr>
                 <td>{item.no}</td>
-                <td>작성자: {item.writer}</td>
+                <td>Writer : {item.writer}</td>
                 <td>
-                  날짜: {item.date}
+                  {item.date}
                   <button
                     type="button"
                     onClick={() => onEdit(item.no)}
