@@ -1,7 +1,7 @@
 // 파이어베이스 서비스에 연결하기 위한 임포트
 import { initializeApp } from "firebase/app";
 // 파이어스토어 데이터베이스를 사용하기 위한 임포트
-import { getDatabase } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_apiKey,
@@ -10,6 +10,7 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_storageBucket,
   messagingSenderId: import.meta.env.VITE_messagingSenderId,
   appId: import.meta.env.VITE_appId,
+  databaseURL: import.meta.env.VITE_databaseURL,
 };
 
 // 파이어베이스에 연결한 후 앱 초기화
