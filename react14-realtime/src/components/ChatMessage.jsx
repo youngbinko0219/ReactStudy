@@ -34,6 +34,7 @@ function ChatMessage() {
       let showDiv = [];
       snapshot.forEach((childSnapshot) => {
         const childData = childSnapshot.val();
+        console.log("리스너", childData.id, userId);
         if (childData === userId) {
           showDiv.push(
             <div className="myMsg" style={{ textAlign: "right" }}>
